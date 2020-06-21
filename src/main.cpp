@@ -8,8 +8,18 @@
 void setup() {
     #include "wifiAuthentication.h"
     WiFi.begin(ssid, password);
+
+    while ( WiFi.status() != WL_CONNECTED )
+        delay(1000);
 }
 
 void loop() {
 
+    
+
+    //check sensors
+
+    //post results to bot
+
+    delay(100);
 }
