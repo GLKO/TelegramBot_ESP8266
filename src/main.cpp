@@ -1,25 +1,30 @@
-#include <Arduino.h>
+#include "arduinoonpc.h"
+#include "config.h"
+#include "internet.h"
+#include "telegrambot.h"
+#include "mainlogic.h"
 
-#include <ESP8266WiFi.h>
-#include <ESP8266HTTPClient.h>
 
+int main()
+{
+#ifdef PC
+    InternetPc internet;
+#else
+    InternetWifiArduino inretnet(ssid, password);
+#endif
 
+    internet.connect();
 
-void setup() {
-    #include "wifiAuthentication.h"
-    WiFi.begin(ssid, password);
+    TelegramBot bot(&internet, token);
 
-    while ( WiFi.status() != WL_CONNECTED )
-        delay(1000);
-}
-
-void loop() {
-
+    MainLogic logic;
     
+    while (true)
+    {
+        //check sensors
+        bot.update();
+        logic.update(); //post results to bot
 
-    //check sensors
-
-    //post results to bot
-
-    delay(100);
+        delay(3000);
+    }
 }
