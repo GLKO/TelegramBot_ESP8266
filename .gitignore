@@ -4,3 +4,17 @@
 .vscode/launch.json
 .vscode/ipch
 
+BotDebug/.qmake.stash
+BotDebug/BotDebug.pro.user
+BotDebug/debug/BotDebug.exe
+BotDebug/debug/BotDebug.ilk
+BotDebug/debug/BotDebug.pdb
+BotDebug/debug/BotDebug.vc.pdb
+BotDebug/debug/internet.obj
+BotDebug/debug/main.obj
+BotDebug/debug/mainlogic.obj
+BotDebug/debug/telegrambot.obj
+BotDebug/Makefile
+BotDebug/Makefile.Debug
+BotDebug/Makefile.Release
+src/config.h
