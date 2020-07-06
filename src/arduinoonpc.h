@@ -5,10 +5,13 @@
 #include <QString>
 typedef QString String;
 
-#include <QtTest/QTest>
+#include <chrono>
+#include <thread>
 inline void delay(int msec) {
-    QTest::qWait(msec);
+    std::this_thread::sleep_for(std::chrono::milliseconds(msec));
 }
+
+#include <QCoreApplication>
 
 #else
 #include <Arduino.h>
