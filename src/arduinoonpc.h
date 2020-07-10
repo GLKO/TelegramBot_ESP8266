@@ -7,11 +7,11 @@ typedef QString String;
 
 #include <chrono>
 #include <thread>
+#include <QCoreApplication>
+
 inline void delay(int msec) {
     std::this_thread::sleep_for(std::chrono::milliseconds(msec));
 }
-
-#include <QCoreApplication>
 
 #else
 #include <Arduino.h>
