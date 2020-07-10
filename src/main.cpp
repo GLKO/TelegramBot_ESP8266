@@ -8,6 +8,9 @@
 int main()
 {
 #ifdef PC
+    char *argv[1];
+    int argc = 0;
+    QCoreApplication a(argc, argv);
     InternetPc internet;
 #else
     InternetWifiArduino inretnet(ssid, password);
@@ -21,10 +24,10 @@ int main()
     
     while (true)
     {
-        //check sensors
+        internet.update();
         bot.update();
         logic.update(); //post results to bot
 
-        delay(3000);
+        delay(10000);
     }
 }

@@ -1,13 +1,7 @@
 #include "internet.h"
 
 #ifdef PC
-
-
-#else
-#include <ESP8266WiFi.h>
-#include <ESP8266HTTPClient.h>
-#endif
-
+#include <QNetworkReply>
 
 InternetPc::InternetPc()
 {
@@ -19,16 +13,49 @@ void InternetPc::connect() const
 
 }
 
-void InternetPc::post(String url) const
+void InternetPc::update()
 {
 
 }
 
-String InternetPc::get(String url) const
+void InternetPc::post(String url)
 {
-    return String();
+    auto reply = _internet.get(QNetworkRequest(QUrl(url)));
+    qDebug() << "Post request sent";
+
+    waitReply(reply);
+
+    QTextStream str(reply);
+    _reply = str.readAll();
+    qDebug() << _reply;
 }
 
+void InternetPc::get(String url)
+{
+    auto reply = _internet.get(QNetworkRequest(QUrl(url)));
+    qDebug() << "Get request sent";
+
+    waitReply(reply);
+
+    QTextStream str(reply);
+    _reply = str.readAll();
+    qDebug() << _reply;
+}
+
+String InternetPc::reply() const
+{
+    return _reply;
+}
+
+void InternetPc::waitReply(QNetworkReply *reply) const
+{
+    while ( !reply->isFinished() )
+    {
+        QCoreApplication::processEvents();
+    }
+}
+
+#else
 
 // ----------- ARDUINO --------------- //
 
@@ -45,12 +72,23 @@ void InternetWifiArduino::connect() const
     //        delay(1000);
 }
 
-void InternetWifiArduino::post(String url) const
+void InternetWifiArduino::update()
 {
 
 }
 
-String InternetWifiArduino::get(String url) const
+void InternetWifiArduino::post(String url)
+{
+
+}
+
+void InternetWifiArduino::get(String url)
+{
+
+}
+
+String InternetWifiArduino::reply() const
 {
     return String();
 }
+#endif // PC

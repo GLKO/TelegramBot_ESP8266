@@ -3,6 +3,7 @@ QT += network
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
+#CONFIG += openssl
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -21,13 +22,15 @@ HEADERS += \
     ../src/config.h \
     ../src/internet.h \
     ../src/mainlogic.h \
-    ../src/telegrambot.h
+    ../src/telegrambot.h \
+    ../src/telegramobjects.h
 
 SOURCES += \
         ../src/internet.cpp \
         ../src/main.cpp \
         ../src/mainlogic.cpp \
-        ../src/telegrambot.cpp
+        ../src/telegrambot.cpp \
+        ../src/telegramobjects.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
