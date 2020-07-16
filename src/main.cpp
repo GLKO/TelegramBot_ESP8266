@@ -2,6 +2,7 @@
 #include "config.h"
 #include "internet.h"
 #include "telegrambot.h"
+#include "bme280.h"
 #include "mainlogic.h"
 
 
@@ -19,8 +20,10 @@ int main()
     internet.connect();
 
     TelegramBot bot(&internet, token);
+    BME280Temperature temperatureSensor;
+    BME280Humidity humiditySensor;
 
-    MainLogic logic;
+    MainLogic logic(&bot, &temperatureSensor, &humiditySensor);
     
     while (true)
     {
