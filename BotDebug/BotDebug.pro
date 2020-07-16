@@ -19,13 +19,17 @@ DEFINES += PC
 
 HEADERS += \
     ../src/arduinoonpc.h \
+    ../src/bme280.h \
     ../src/config.h \
+    ../src/device.h \
     ../src/internet.h \
     ../src/mainlogic.h \
+    ../src/sensor.h \
     ../src/telegrambot.h \
     ../src/telegramobjects.h
 
 SOURCES += \
+        ../src/bme280.cpp \
         ../src/internet.cpp \
         ../src/main.cpp \
         ../src/mainlogic.cpp \
