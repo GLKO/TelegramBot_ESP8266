@@ -7,14 +7,14 @@ class Sensor;
 class MainLogic
 {
 public:
-    MainLogic(TelegramBot *bot, Sensor *temperatureSensor,Sensor *humiditySensor);
+    MainLogic(TelegramBot &telegramBot, Sensor &temperatureSensor,Sensor &humiditySensor);
 
     void update();
 
 private:
-    TelegramBot *const _telegramBot = nullptr;
-    Sensor *const _temperatureSensor = nullptr;
-    Sensor *const _humiditySensor = nullptr;
+    TelegramBot &_telegramBot;
+    Sensor &_temperatureSensor;
+    Sensor &_humiditySensor;
 };
 
 #endif // MAINLOGIC_H
