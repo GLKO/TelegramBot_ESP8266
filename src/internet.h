@@ -1,7 +1,7 @@
 #ifndef INTERNET_H
 #define INTERNET_H
 
-#include "arduinoonpc.h"
+//#include "arduinoonpc.h"
 #include "mystring.h"
 
 #ifdef PC

@@ -21,3 +21,5 @@ src/config.h
 BotDebug/debug/libcrypto-1_1-x64.dll
 BotDebug/debug/libssl-1_1-x64.dll
 BotDebug/debug/telegramobjects.obj
+*.obj
+src/string.cpp.autosave

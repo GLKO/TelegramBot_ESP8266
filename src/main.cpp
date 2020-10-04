@@ -1,5 +1,4 @@
 #include "arduinoonpc.h"
-#include "config.h"
 #include "internet.h"
 #include "telegrambot.h"
 #include "bme280.h"
@@ -9,28 +8,26 @@
 int main()
 {
 #ifdef PC
+    //check without it
     char *argv[1];
     int argc = 0;
     QCoreApplication a(argc, argv);
     InternetPc internet;
 #else
-    InternetWifiArduino inretnet(ssid, password);
+    InternetWifiArduino internet;
 #endif
 
-    internet.connect();
-
-    TelegramBot bot(&internet, token);
     BME280Temperature temperatureSensor;
     BME280Humidity humiditySensor;
 
-    MainLogic logic(&bot, &temperatureSensor, &humiditySensor);
+    TelegramBot bot(internet);
+
+    MainLogic logic(bot, temperatureSensor, humiditySensor);
     
     while (true)
     {
-        internet.update();
-        bot.update();
-        logic.update(); //post results to bot
+        logic.update();
 
-        delay(10000);
+        delay(3000);
     }
 }
