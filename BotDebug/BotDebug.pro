@@ -24,6 +24,7 @@ HEADERS += \
     ../src/device.h \
     ../src/internet.h \
     ../src/mainlogic.h \
+    ../src/mystring.h \
     ../src/sensor.h \
     ../src/telegrambot.h \
     ../src/telegramobjects.h
@@ -33,6 +34,7 @@ SOURCES += \
         ../src/internet.cpp \
         ../src/main.cpp \
         ../src/mainlogic.cpp \
+        ../src/mystring.cpp \
         ../src/telegrambot.cpp \
         ../src/telegramobjects.cpp
 
