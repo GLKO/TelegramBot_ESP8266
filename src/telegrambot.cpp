@@ -1,23 +1,34 @@
 #include "telegrambot.h"
 
+#include "config.h"
+#include "telegramobjects.h"
+#include "internet.h"
 
-TelegramBot::TelegramBot(Internet * const internet, String token)
-    : _token(token),
-      _internet(internet)
+TelegramBot::TelegramBot(Internet &internet)
+    : _internet(internet),
+      _token(token)
 {}
 
 void TelegramBot::update()
 {
-    auto reply = _internet->reply();
-
     String method = "/getUpdates";
+    _internet.get(_botApiUrl + _token + method);
 
-    TelegramTextMessage message("420638906", "It's working!");
-    send(message);
+    const auto reply = _internet.reply();
+
+
+    //auto data = reply.value("data");
+    //run callback function depends on callback_data
 }
 
-void TelegramBot::send(TelegramObject &object)
+void TelegramBot::updateMessage(TelegramObject &object)
 {
-    String method = "/sendMessage?";
-    _internet->post(_botApiUrl+_token+method + object.json());
+    const String method = "/editMessageText?";
+    _internet.post(_botApiUrl + _token + method + "message_id=57&" + object.json());
+}
+
+void TelegramBot::sendMesage(TelegramObject &object)
+{
+    const String method = "/sendMessage?";
+    _internet.post(_botApiUrl + _token + method + object.json());
 }

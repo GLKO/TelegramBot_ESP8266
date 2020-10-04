@@ -1,24 +1,26 @@
 #ifndef TELEGRAMBOT_H
 #define TELEGRAMBOT_H
 
-#include "arduinoonpc.h"
-#include "internet.h"
+#include "mystring.h"
 
-#include "telegramobjects.h"
-
+class TelegramObject;
+class Internet;
 
 class TelegramBot
 {
 public:
-    TelegramBot(Internet *const internet, String token);
+    TelegramBot(Internet &internet);
 
     void update();
-    void send(TelegramObject &object);
+
+    void sendMesage(TelegramObject &object);
+    void updateMessage(TelegramObject &object);
 
 private:
+    Internet &_internet;
     const String _botApiUrl = "https://api.telegram.org/bot";
     const String _token;
-    Internet *const _internet = nullptr;
+
 };
 
 
