@@ -1,10 +1,7 @@
 #ifndef ARDUINOONPC_H
 #define ARDUINOONPC_H
+
 #ifdef PC
-
-#include <QString>
-typedef QString String;
-
 #include <chrono>
 #include <thread>
 #include <QCoreApplication>
@@ -14,6 +11,6 @@ inline void delay(int msec) {
 }
 
 #else
-#include <Arduino.h>
+//#include <Arduino.h>
 #endif
 #endif // ARDUINOONPC_H
