@@ -1,5 +1,7 @@
 #include "internet.h"
 
+#include "mystring.h"
+
 #ifdef PC
 #include <QNetworkReply>
 
@@ -20,26 +22,26 @@ void InternetPc::update()
 
 void InternetPc::post(String url)
 {
-    auto reply = _internet.get(QNetworkRequest(QUrl(url)));
-    qDebug() << "Post request sent";
+    auto reply = _internet.get(QNetworkRequest(QUrl(url.c_str())));
+    qDebug() << "Post request sent" << '\n' << url.c_str();
 
     waitReply(reply);
 
     QTextStream str(reply);
-    _reply = str.readAll();
-    qDebug() << _reply;
+    _reply = str.readAll().toStdString().c_str();
+    qDebug() << _reply.c_str();
 }
 
 void InternetPc::get(String url)
 {
-    auto reply = _internet.get(QNetworkRequest(QUrl(url)));
+    auto reply = _internet.get(QNetworkRequest(QUrl(url.c_str())));
     qDebug() << "Get request sent";
 
     waitReply(reply);
 
     QTextStream str(reply);
-    _reply = str.readAll();
-    qDebug() << _reply;
+    _reply = str.readAll().toStdString().c_str();
+    qDebug() << _reply.c_str();
 }
 
 String InternetPc::reply() const

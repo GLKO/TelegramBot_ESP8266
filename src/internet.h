@@ -2,6 +2,7 @@
 #define INTERNET_H
 
 #include "arduinoonpc.h"
+#include "mystring.h"
 
 #ifdef PC
 #include <QNetworkAccessManager>
