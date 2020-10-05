@@ -22,6 +22,7 @@ HEADERS += \
     ../src/bme280.h \
     ../src/config.h \
     ../src/device.h \
+    ../src/imodel.h \
     ../src/internet.h \
     ../src/isensor.h \
     ../src/mainlogic.h \
