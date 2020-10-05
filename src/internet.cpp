@@ -4,6 +4,7 @@
 
 #ifdef PC
 #include <QNetworkReply>
+#include <QCoreApplication>
 
 InternetPc::InternetPc()
 {
