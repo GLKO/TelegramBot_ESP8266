@@ -1,18 +1,19 @@
 #ifndef MAINLOGIC_H
 #define MAINLOGIC_H
 
-class TelegramBot;
+#include "imodel.h"
+
 class Sensor;
 
-class MainLogic
+class MainLogic : public Model
 {
 public:
-    MainLogic(TelegramBot &telegramBot, Sensor &temperatureSensor,Sensor &humiditySensor);
+    MainLogic(Sensor &temperatureSensor,Sensor &humiditySensor);
 
     void update();
+    State currentState() override;
 
 private:
-    TelegramBot &_telegramBot;
     Sensor &_temperatureSensor;
     Sensor &_humiditySensor;
 };

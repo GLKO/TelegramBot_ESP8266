@@ -8,7 +8,7 @@ View::View(Model &model, TelegramBot &bot)
     : _model(model),
       _telegramBot(bot)
 {
-    _model.connectUpdate(&IView::modelUpdated);
+    _model.setView(this);
 }
 
 

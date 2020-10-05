@@ -23,8 +23,8 @@ int main()
 
     TelegramBot bot(internet);
 
-    MainLogic logic(bot, temperatureSensor, humiditySensor);
-//    View view(&logic);
+    MainLogic logic(temperatureSensor, humiditySensor);
+    View view(logic, bot);
     
     while (true)
     {

@@ -1,33 +1,27 @@
 #include "mainlogic.h"
 
-#include "telegramobjects.h"
 #include "isensor.h"
-#include "telegrambot.h"
 
-#include <iostream>
 
-MainLogic::MainLogic(TelegramBot &telegramBot, Sensor &temperatureSensor, Sensor &humiditySensor)
-    : _telegramBot(telegramBot),
-      _temperatureSensor(temperatureSensor),
+MainLogic::MainLogic(Sensor &temperatureSensor, Sensor &humiditySensor)
+    : _temperatureSensor(temperatureSensor),
       _humiditySensor(humiditySensor)
 {}
 
 void MainLogic::update()
 {
-    _telegramBot.update();
+//    if (timeout(600sec)
+    _view->modelUpdated();
 
-    auto temperature = _temperatureSensor.value();
-    auto humidity = _humiditySensor.value();
+//    if (smthg bad)
+//        _view ->alarm("!ALARM!");
+}
 
-    TelegramMessage textMessage("Hi");
-
-    TelegramInlineButton temperatureButton("   Temperature:    nice!   ", "1");
-    TelegramInlineButton humidityButton   ("   Humidity:          OK   ","2");
-
-    TelegramInlineKeyboard<2> keyboard;
-    keyboard.addButton( &temperatureButton );
-    keyboard.addButton( &humidityButton );
-
-    TelegramComplexMessage message( textMessage, keyboard );
-    _telegramBot.updateMessage(message);
+State MainLogic::currentState()
+{
+    State result;
+    result.message = "Last update: ??.??.?? ??:??";
+    result.temperature = _temperatureSensor.value();
+    result.humidity = _humiditySensor.value();
+    return result;
 }
