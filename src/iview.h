@@ -5,7 +5,6 @@ class IView
 {
 public:
     ~IView();
-private:
     virtual void modelUpdated() = 0;
 };
 

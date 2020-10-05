@@ -4,15 +4,16 @@
 #include "iview.h"
 
 class Model;
-
+class TelegramBot;
 
 class View : public IView
 {
 public:
-    View(Model *const model);
+    View(Model &model, TelegramBot &bot);
 
 private:
-    Model *const _model;
+    Model &_model;
+    TelegramBot &_telegramBot;
 
     void modelUpdated() override;
 };

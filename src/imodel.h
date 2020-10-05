@@ -2,7 +2,6 @@
 #define MODEL_H
 
 #include "mystring.h"
-#include "iview.h"
 
 struct State
 {
