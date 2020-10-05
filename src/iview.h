@@ -9,7 +9,7 @@ public:
     virtual void modelUpdated() = 0;
     virtual void alarm(String message) {}
 
-    ~IView() {}
+    virtual ~IView() {}
 };
 
 #endif // IVIEW_H

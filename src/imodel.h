@@ -16,7 +16,7 @@ class Model
 {
 public:
     virtual State currentState() = 0;
-    ~Model() {}
+    virtual ~Model() {}
 
     void setView(IView *view)
     {
