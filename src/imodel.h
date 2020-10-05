@@ -2,6 +2,7 @@
 #define MODEL_H
 
 #include "mystring.h"
+#include "iview.h"
 
 struct State
 {
@@ -10,7 +11,8 @@ struct State
     double humidity = 101;
 };
 
-typedef  void (*UpdateCallback)();
+class IView;
+typedef  void (IView::*UpdateCallback)();
 
 class Model
 {
