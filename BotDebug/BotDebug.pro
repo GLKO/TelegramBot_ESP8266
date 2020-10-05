@@ -25,10 +25,12 @@ HEADERS += \
     ../src/imodel.h \
     ../src/internet.h \
     ../src/isensor.h \
+    ../src/iview.h \
     ../src/mainlogic.h \
     ../src/mystring.h \
     ../src/telegrambot.h \
-    ../src/telegramobjects.h
+    ../src/telegramobjects.h \
+    ../src/view.h
 
 SOURCES += \
         ../src/bme280.cpp \
@@ -37,7 +39,8 @@ SOURCES += \
         ../src/mainlogic.cpp \
         ../src/mystring.cpp \
         ../src/telegrambot.cpp \
-        ../src/telegramobjects.cpp
+        ../src/telegramobjects.cpp \
+        ../src/view.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

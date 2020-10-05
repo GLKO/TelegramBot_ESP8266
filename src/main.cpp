@@ -3,6 +3,7 @@
 #include "telegrambot.h"
 #include "bme280.h"
 #include "mainlogic.h"
+#include "view.h"
 
 
 int main()
@@ -23,6 +24,7 @@ int main()
     TelegramBot bot(internet);
 
     MainLogic logic(bot, temperatureSensor, humiditySensor);
+//    View view(&logic);
     
     while (true)
     {
