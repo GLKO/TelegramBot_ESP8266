@@ -1,7 +1,7 @@
 #ifndef BME280_H
 #define BME280_H
 
-#include "sensor.h"
+#include "isensor.h"
 
 
 class BME280Temperature : public Sensor

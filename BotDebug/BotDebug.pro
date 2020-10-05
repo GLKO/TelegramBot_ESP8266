@@ -23,9 +23,9 @@ HEADERS += \
     ../src/config.h \
     ../src/device.h \
     ../src/internet.h \
+    ../src/isensor.h \
     ../src/mainlogic.h \
     ../src/mystring.h \
-    ../src/sensor.h \
     ../src/telegrambot.h \
     ../src/telegramobjects.h
 

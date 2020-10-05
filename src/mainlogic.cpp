@@ -1,7 +1,7 @@
 #include "mainlogic.h"
 
 #include "telegramobjects.h"
-#include "sensor.h"
+#include "isensor.h"
 #include "telegrambot.h"
 
 #include <iostream>
