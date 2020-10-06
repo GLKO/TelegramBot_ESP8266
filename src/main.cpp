@@ -28,6 +28,7 @@ int main()
     
     while (true)
     {
+        view.update();
         logic.update();
 
         delay(3000);
