@@ -1,9 +1,7 @@
 #include "bme280.h"
 
 BME280Temperature::BME280Temperature()
-{
-
-}
+{}
 
 double BME280Temperature::value()
 {
@@ -14,11 +12,11 @@ double BME280Temperature::value()
 
 
 BME280Humidity::BME280Humidity()
-{
-
-}
+{}
 
 double BME280Humidity::value()
 {
-    return 31.4;
+    static double temper = 31.4;
+    temper += 0.1;
+    return temper;
 }
