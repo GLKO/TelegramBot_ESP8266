@@ -28,15 +28,28 @@ String TelegramComplexMessage::json() const
 
 
 
-TelegramInlineButton::TelegramInlineButton(String text, String callbackData)
-    : _text(text),
+TelegramInlineButton::TelegramInlineButton(TelegramCallback callback, TelegramController *controller, String callbackData)
+    : _callBack(callback),
+      _controller(controller),
       _callbackData(callbackData)
 {}
+
+void TelegramInlineButton::updateText(String text)
+{
+    _text = text;
+}
+
+void TelegramInlineButton::doCallback() const
+{
+    _callBack(_controller);
+}
 
 String TelegramInlineButton::json() const
 {
     return "{\"text\":\"" + _text + "\",\"callback_data\":" + _callbackData + "}";
 }
+
+
 
 
 TelegramReplyButton::TelegramReplyButton(String text)

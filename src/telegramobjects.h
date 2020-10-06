@@ -3,6 +3,21 @@
 
 #include "mystring.h"
 
+class TelegramController
+{
+public:
+    virtual long acceptReply(const String &reply)
+    {
+        long lastUpdateId = 0;
+        return lastUpdateId;
+    }
+    virtual ~TelegramController() {}
+};
+
+typedef void(*TelegramCallback)(TelegramController *instance);
+
+
+
 class TelegramObject
 {
 public:
@@ -22,6 +37,8 @@ private:
     const String _chat_id = "420638906"; //CRUTCH
 };
 
+
+
 class TelegramComplexMessage : public TelegramObject
 {
 public:
@@ -38,13 +55,20 @@ private:
 class TelegramInlineButton : public TelegramObject
 {
 public:
-    TelegramInlineButton(String text, String callbackData);
+    TelegramInlineButton(TelegramCallback callback, TelegramController *controller, String callbackData);
+
+    void updateText(String text);
+    void doCallback() const;
     String json() const override;
 
 private:
-    const String _text;
+    String _text;
+    TelegramCallback const _callBack;
+    TelegramController *const _controller;
     const String _callbackData;
 };
+
+
 
 //template used instead dynamic array
 template<int size>
@@ -52,14 +76,14 @@ class TelegramInlineKeyboard : public TelegramObject
 {
 public:
     TelegramInlineKeyboard() {}
-    void addButton(TelegramInlineButton *button)
+    TelegramInlineButton *createButton(TelegramCallback callback, TelegramController *controller)
     {
-        for (int i = 0; i < size; ++i)
+        for (long i = 0; i < size; ++i)
         {
             if ( _buttons[i] != nullptr ) continue;
 
-            _buttons[i] = button;
-            break;
+            _buttons[i] = new TelegramInlineButton(callback, controller, String(i));
+            return _buttons[i];
         }
     }
 
@@ -80,6 +104,21 @@ public:
         return result;
     }
 
+    void checkReply(const String &reply)
+    {
+        int callBackData = reply.removeBeginTo("\"data\":\"", -1l).toLong();
+        if ( callBackData < 0 || callBackData > size - 1 ) return;
+        _buttons[callBackData]->doCallback();
+    }
+
+    ~TelegramInlineKeyboard()
+    {
+        for (auto &button : _buttons)
+        {
+            if ( button != nullptr ) delete button;
+        }
+    }
+
 private:
     TelegramInlineButton *_buttons[size] = {nullptr};
 };
@@ -95,6 +134,8 @@ public:
 private:
     const String _text;
 };
+
+
 
 //template used instead dynamic array
 template<int size>
