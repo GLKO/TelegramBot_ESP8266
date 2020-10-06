@@ -7,14 +7,20 @@ class String
 public:
     String();
     String(const char *str);
+    String(const char *str, double num);
+    String(long num);
+    String(double num);
     String(const String &str);
     String(String &&str);
 
-    char *c_str() const;
+    const char *c_str() const;
+    size_t length() const;
+    String removeBeginTo(const String &str, const String &defStr = "") const;
+    String findNum(const String &str, const String &defStr = "") const;
+    long toLong() const;
     void clear();
 
     String operator +(const String &anotherStr) const;
-//    String operator +(const char *anotherStr) const;
 
     void operator =(const char *anotherStr);
     void operator =(const String &anotherStr);
