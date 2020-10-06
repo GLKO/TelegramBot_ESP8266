@@ -16,6 +16,9 @@ class Model
 {
 public:
     virtual State currentState() = 0;
+
+    virtual void tempOrHumidPressed() = 0;
+
     virtual ~Model() {}
 
     void setView(IView *view)

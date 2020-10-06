@@ -13,6 +13,8 @@ public:
     void update();
     State currentState() override;
 
+    void tempOrHumidPressed() override;
+
 private:
     Sensor &_temperatureSensor;
     Sensor &_humiditySensor;
