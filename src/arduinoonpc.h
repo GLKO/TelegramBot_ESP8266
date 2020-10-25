@@ -11,6 +11,7 @@ inline void delay(int msec) {
 }
 
 #else
-//#include <Arduino.h>
+// #include <Arduino.h>
 #endif
+
 #endif // ARDUINOONPC_H
