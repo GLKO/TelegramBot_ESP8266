@@ -24,6 +24,7 @@ class TelegramObject
 {
 public:
     virtual MyString json() const = 0;
+    virtual ~TelegramObject() {};
 };
 
 
