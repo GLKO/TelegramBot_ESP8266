@@ -88,6 +88,7 @@ public:
             _buttons[i] = new TelegramInlineButton(callback, controller, MyString(i));
             return _buttons[i];
         }
+        return nullptr;
     }
 
     MyString json() const override
