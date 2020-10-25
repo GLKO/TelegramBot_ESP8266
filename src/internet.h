@@ -50,7 +50,7 @@ private:
 class InternetWifiArduino : public Internet
 {
 public:
-    InternetWifiArduino(String wifiName, String password);
+    InternetWifiArduino();
 
     void connect() const override;
 

@@ -1,6 +1,7 @@
 #include "internet.h"
 
-#include "mystring.h"
+// #include "mystring.h"
+#include "config.h"
 
 #ifdef PC
 #include <QNetworkReply>
@@ -62,7 +63,7 @@ void InternetPc::waitReply(QNetworkReply *reply) const
 
 // ----------- ARDUINO --------------- //
 
-InternetWifiArduino::InternetWifiArduino(String wifiName, String password)
+InternetWifiArduino::InternetWifiArduino()
 {
 
 }
