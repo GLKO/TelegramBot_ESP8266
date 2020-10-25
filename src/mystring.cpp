@@ -88,8 +88,8 @@ MyString MyString::operator +(const MyString &anotherStr) const
     auto length = strlen(anotherStr._str) + strlen(this->_str) + 1;
     auto res = new char[length];
     res[0] = '\0';
-    strcat_s(res, length, _str);
-    strcat_s(res, length, anotherStr._str);
+    strcat(res, _str);
+    strcat(res, anotherStr._str);
     MyString result;
     result._str = res;
     return result;
@@ -100,7 +100,7 @@ void MyString::operator =(const char *anotherStr)
     auto length = strlen( anotherStr ) + 1;
     clear();
     _str = new char[length+1];
-    strcpy_s( _str, length, anotherStr );
+    strcpy( _str, anotherStr );
 }
 
 void MyString::operator =(const MyString &anotherStr)
