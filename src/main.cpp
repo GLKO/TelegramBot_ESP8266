@@ -6,15 +6,20 @@
 #include "view.h"
 
 
+
+#ifdef PC
 int main()
 {
-#ifdef PC
     //check without it
     char *argv[1];
     int argc = 0;
     QCoreApplication a(argc, argv);
     InternetPc internet;
 #else
+void loop() {}
+
+void setup()
+{
     InternetWifiArduino internet;
 #endif
 
