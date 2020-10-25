@@ -81,18 +81,18 @@ void InternetWifiArduino::update()
 
 }
 
-void InternetWifiArduino::post(String url)
+void InternetWifiArduino::post(MyString url)
 {
 
 }
 
-void InternetWifiArduino::get(String url)
+void InternetWifiArduino::get(MyString url)
 {
 
 }
 
-String InternetWifiArduino::reply() const
+MyString InternetWifiArduino::reply() const
 {
-    return String();
+    return MyString();
 }
 #endif // PC

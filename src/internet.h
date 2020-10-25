@@ -55,9 +55,9 @@ public:
     void connect() const override;
 
     void update() override;
-    void post(String url) override;
-    void get(String url) override;
-    String reply() const override;
+    void post(MyString url) override;
+    void get(MyString url) override;
+    MyString reply() const override;
 };
 
 #endif // PC
