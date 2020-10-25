@@ -3,14 +3,16 @@
 
 #include "mystring.h"
 
+typedef long LastUpdateId;
+
 class TelegramController
 {
 public:
-    virtual long acceptReply(const String &reply)
-    {
-        long lastUpdateId = 0;
-        return lastUpdateId;
-    }
+    virtual LastUpdateId acceptReply(const String &reply) = 0;
+//    {
+//        long lastUpdateId = 0;
+//        return lastUpdateId;
+//    }
     virtual ~TelegramController() {}
 };
 
