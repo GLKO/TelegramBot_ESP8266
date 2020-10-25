@@ -17,12 +17,12 @@ public:
 
     void sendMesage(const TelegramObject &object);
     void updateMessage(const TelegramObject &object);
-    void answerCallbackQuery(const String &callbackQueryId);
+    void answerCallbackQuery(const MyString &callbackQueryId);
 
 private:
     Internet &_internet;
-    const String _botApiUrl = "https://api.telegram.org/bot";
-    const String _token;
+    const MyString _botApiUrl = "https://api.telegram.org/bot";
+    const MyString _token;
 
     TelegramController *_controller = nullptr;
 

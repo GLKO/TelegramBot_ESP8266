@@ -1,16 +1,16 @@
 #include "telegramobjects.h"
 
 
-TelegramMessage::TelegramMessage(String text)
+TelegramMessage::TelegramMessage(MyString text)
     : _text(text)
 {}
 
-TelegramMessage::TelegramMessage(String text, String chatId)
+TelegramMessage::TelegramMessage(MyString text, MyString chatId)
     : _text(text),
       _chat_id(chatId)
 {}
 
-String TelegramMessage::json() const
+MyString TelegramMessage::json() const
 {
     return "chat_id=" + _chat_id + "&text=" + _text;
 }
@@ -21,20 +21,20 @@ TelegramComplexMessage::TelegramComplexMessage(const TelegramMessage &textMessag
       _optionalParameter(optionalParameter)
 {}
 
-String TelegramComplexMessage::json() const
+MyString TelegramComplexMessage::json() const
 {
     return _textMessage.json() + "&" + _optionalParameter.json();
 }
 
 
 
-TelegramInlineButton::TelegramInlineButton(TelegramCallback callback, TelegramController *controller, String callbackData)
+TelegramInlineButton::TelegramInlineButton(TelegramCallback callback, TelegramController *controller, MyString callbackData)
     : _callBack(callback),
       _controller(controller),
       _callbackData(callbackData)
 {}
 
-void TelegramInlineButton::updateText(String text)
+void TelegramInlineButton::updateText(MyString text)
 {
     _text = text;
 }
@@ -44,7 +44,7 @@ void TelegramInlineButton::doCallback() const
     _callBack(_controller);
 }
 
-String TelegramInlineButton::json() const
+MyString TelegramInlineButton::json() const
 {
     return "{\"text\":\"" + _text + "\",\"callback_data\":" + _callbackData + "}";
 }
@@ -52,11 +52,11 @@ String TelegramInlineButton::json() const
 
 
 
-TelegramReplyButton::TelegramReplyButton(String text)
+TelegramReplyButton::TelegramReplyButton(MyString text)
     : _text(text)
 {}
 
-String TelegramReplyButton::json() const
+MyString TelegramReplyButton::json() const
 {
     return "{\"text\":\"" + _text + "\",\"request_poll\":{\"type\":\"regular\"}}"; //fix optional data
 }

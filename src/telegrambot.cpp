@@ -16,7 +16,7 @@ void TelegramBot::subscribeOnReply(TelegramController *controller)
 
 void TelegramBot::update()
 {
-    String method = "/getUpdates?timeout=1&offset=" + String(_lastUpdateId+1); //allowed_updates=[\"callback_query\"]&
+    MyString method = "/getUpdates?timeout=1&offset=" + MyString(_lastUpdateId+1); //allowed_updates=[\"callback_query\"]&
     _internet.get(_botApiUrl + _token + method);
 
     const auto reply = _internet.reply();
@@ -26,18 +26,18 @@ void TelegramBot::update()
 
 void TelegramBot::updateMessage(const TelegramObject &object)
 {
-    const String method = "/editMessageText?";
+    const MyString method = "/editMessageText?";
     _internet.post(_botApiUrl + _token + method + "message_id=57&" + object.json());
 }
 
 void TelegramBot::sendMesage(const TelegramObject &object)
 {
-    const String method = "/sendMessage?";
+    const MyString method = "/sendMessage?";
     _internet.post(_botApiUrl + _token + method + object.json());
 }
 
-void TelegramBot::answerCallbackQuery(const String &callbackQueryId)
+void TelegramBot::answerCallbackQuery(const MyString &callbackQueryId)
 {
-    const String method = "/answerCallbackQuery?callback_query_id=";
+    const MyString method = "/answerCallbackQuery?callback_query_id=";
     _internet.post(_botApiUrl + _token + method + callbackQueryId);
 }

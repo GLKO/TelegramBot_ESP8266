@@ -13,7 +13,7 @@ public:
     View(Model &model, TelegramBot &bot);
 
     void update();
-    long acceptReply(const String &reply) override;
+    long acceptReply(const MyString &reply) override;
 
 private:
     Model &_model;

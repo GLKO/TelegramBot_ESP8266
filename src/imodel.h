@@ -6,7 +6,7 @@
 
 struct State
 {
-    String message = "blet";
+    MyString message = "blet";
     double temperature = 101;
     double humidity = 101;
 };

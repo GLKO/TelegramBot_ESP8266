@@ -8,7 +8,7 @@ typedef long LastUpdateId;
 class TelegramController
 {
 public:
-    virtual LastUpdateId acceptReply(const String &reply) = 0;
+    virtual LastUpdateId acceptReply(const MyString &reply) = 0;
 //    {
 //        long lastUpdateId = 0;
 //        return lastUpdateId;
@@ -23,20 +23,20 @@ typedef void(*TelegramCallback)(TelegramController *instance);
 class TelegramObject
 {
 public:
-    virtual String json() const = 0;
+    virtual MyString json() const = 0;
 };
 
 
 class TelegramMessage : public TelegramObject
 {
 public:
-    TelegramMessage(String text); //CRUTCH
-    TelegramMessage(String text, String chatId);
-    String json() const override;
+    TelegramMessage(MyString text); //CRUTCH
+    TelegramMessage(MyString text, MyString chatId);
+    MyString json() const override;
 
 private:
-    const String _text;
-    const String _chat_id = "420638906"; //CRUTCH
+    const MyString _text;
+    const MyString _chat_id = "420638906"; //CRUTCH
 };
 
 
@@ -45,7 +45,7 @@ class TelegramComplexMessage : public TelegramObject
 {
 public:
     TelegramComplexMessage(const TelegramMessage &textMessage, const TelegramObject &optionalParameter);
-    String json() const override;
+    MyString json() const override;
 
 private:
     const TelegramMessage &_textMessage;
@@ -57,17 +57,17 @@ private:
 class TelegramInlineButton : public TelegramObject
 {
 public:
-    TelegramInlineButton(TelegramCallback callback, TelegramController *controller, String callbackData);
+    TelegramInlineButton(TelegramCallback callback, TelegramController *controller, MyString callbackData);
 
-    void updateText(String text);
+    void updateText(MyString text);
     void doCallback() const;
-    String json() const override;
+    MyString json() const override;
 
 private:
-    String _text;
+    MyString _text;
     TelegramCallback const _callBack;
     TelegramController *const _controller;
-    const String _callbackData;
+    const MyString _callbackData;
 };
 
 
@@ -84,14 +84,14 @@ public:
         {
             if ( _buttons[i] != nullptr ) continue;
 
-            _buttons[i] = new TelegramInlineButton(callback, controller, String(i));
+            _buttons[i] = new TelegramInlineButton(callback, controller, MyString(i));
             return _buttons[i];
         }
     }
 
-    String json() const override
+    MyString json() const override
     {
-        String result = "reply_markup={\"inline_keyboard\":[";
+        MyString result = "reply_markup={\"inline_keyboard\":[";
 
         for (int i = 0; i < size; ++i)
         {
@@ -106,7 +106,7 @@ public:
         return result;
     }
 
-    void checkReply(const String &reply)
+    void checkReply(const MyString &reply)
     {
         int callBackData = reply.removeBeginTo("\"data\":\"", -1l).toLong();
         if ( callBackData < 0 || callBackData > size - 1 ) return;
@@ -130,11 +130,11 @@ private:
 class TelegramReplyButton : public TelegramObject
 {
 public:
-    TelegramReplyButton(String text);
-    String json() const override;
+    TelegramReplyButton(MyString text);
+    MyString json() const override;
 
 private:
-    const String _text;
+    const MyString _text;
 };
 
 
@@ -156,9 +156,9 @@ public:
         }
     }
 
-    String json() const override
+    MyString json() const override
     {
-        String result = "reply_markup={\"keyboard\":[";
+        MyString result = "reply_markup={\"keyboard\":[";
 
         for (int i = 0; i < size; ++i)
         {

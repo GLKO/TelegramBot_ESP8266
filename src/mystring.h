@@ -3,35 +3,35 @@
 
 #include <string.h>
 
-class String
+class MyString
 {
 public:
-    String();
-    String(const char *str);
-    String(const char *str, double num);
-    String(long num);
-    String(double num);
-    String(const String &str);
-    String(String &&str);
+    MyString();
+    MyString(const char *str);
+    MyString(const char *str, double num);
+    MyString(long num);
+    MyString(double num);
+    MyString(const MyString &str);
+    MyString(MyString &&str);
 
     const char *c_str() const;
     size_t length() const;
-    String removeBeginTo(const String &str, const String &defStr = "") const;
-    String findNum(const String &str, const String &defStr = "") const;
+    MyString removeBeginTo(const MyString &str, const MyString &defStr = "") const;
+    MyString findNum(const MyString &str, const MyString &defStr = "") const;
     long toLong() const;
     void clear();
 
-    String operator +(const String &anotherStr) const;
+    MyString operator +(const MyString &anotherStr) const;
 
     void operator =(const char *anotherStr);
-    void operator =(const String &anotherStr);
+    void operator =(const MyString &anotherStr);
 
-    ~String();
+    ~MyString();
 
 private:
     char *_str = nullptr;
 };
 
-String operator +(const char *oneStr, const String &anotherStr);
+MyString operator +(const char *oneStr, const MyString &anotherStr);
 
 #endif // STRING_H

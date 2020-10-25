@@ -22,7 +22,7 @@ void InternetPc::update()
 
 }
 
-void InternetPc::post(String url)
+void InternetPc::post(MyString url)
 {
     auto reply = _internet.get(QNetworkRequest(QUrl(url.c_str())));
     qDebug() << "Post request sent" << '\n' << url.c_str();
@@ -34,7 +34,7 @@ void InternetPc::post(String url)
     qDebug() << _reply.c_str();
 }
 
-void InternetPc::get(String url)
+void InternetPc::get(MyString url)
 {
     auto reply = _internet.get(QNetworkRequest(QUrl(url.c_str())));
     qDebug() << "Get request sent";
@@ -46,7 +46,7 @@ void InternetPc::get(String url)
     qDebug() << _reply.c_str();
 }
 
-String InternetPc::reply() const
+MyString InternetPc::reply() const
 {
     return _reply;
 }

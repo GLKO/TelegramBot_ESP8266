@@ -7,7 +7,7 @@ class IView
 {
 public:
     virtual void modelUpdated() = 0;
-    virtual void alarm(String message) {}
+    virtual void alarm(MyString message) {}
 
     virtual ~IView() {}
 };

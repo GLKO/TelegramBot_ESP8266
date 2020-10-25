@@ -24,8 +24,8 @@ void View::update()
 
     TelegramMessage textMessage(state.message);
 
-    _temperatureButton->updateText( String("   Temperature:       %.1f   ", state.temperature) );
-    _humidityButton->updateText(    String("   Humidity:             %.1f   ", state.humidity) );
+    _temperatureButton->updateText( MyString("   Temperature:       %.1f   ", state.temperature) );
+    _humidityButton->updateText(    MyString("   Humidity:             %.1f   ", state.humidity) );
 
     TelegramComplexMessage message( textMessage, _keyboard );
     _telegramBot.updateMessage(message);
@@ -33,7 +33,7 @@ void View::update()
     _needUpdate = false;
 }
 
-long View::acceptReply(const String &reply)
+long View::acceptReply(const MyString &reply)
 {
     long lastUpdateId = 0;
     auto nextReply = reply;

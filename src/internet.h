@@ -18,9 +18,9 @@ public:
     virtual void connect() const = 0;
 
     virtual void update() = 0;
-    virtual void post(String url) = 0;
-    virtual void get(String url) = 0;
-    virtual String reply() const = 0;
+    virtual void post(MyString url) = 0;
+    virtual void get(MyString url) = 0;
+    virtual MyString reply() const = 0;
 
     virtual ~Internet() {}
 };
@@ -34,13 +34,13 @@ public:
     void connect() const override;
 
     void update() override;
-    void post(String url) override;
-    void get(String url) override;
-    String reply() const override;
+    void post(MyString url) override;
+    void get(MyString url) override;
+    MyString reply() const override;
 
 private:
     QNetworkAccessManager _internet;
-    String _reply;
+    MyString _reply;
 
     void waitReply(QNetworkReply *reply) const;
 };

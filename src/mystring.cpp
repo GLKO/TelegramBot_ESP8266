@@ -4,49 +4,49 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-String::String()
+MyString::MyString()
 {}
 
-String::String(const char *str)
+MyString::MyString(const char *str)
 {
     *this = str;
 }
 
-String::String(const char *str, double num)
+MyString::MyString(const char *str, double num)
 {
     _str = new char[strlen(str) + sizeof (num) * 8 + 1];
     sprintf(_str, str, num);
 }
 
-String::String(long num)
+MyString::MyString(long num)
 {
     _str = new char[sizeof (num) * 8 + 1];
     sprintf(_str, "%li", num);
 }
 
-String::String(const String &str)
+MyString::MyString(const MyString &str)
 {
     *this = str;
 }
 
-String::String(String &&str)
+MyString::MyString(MyString &&str)
 {
     _str = str._str;
     str._str = nullptr;
 }
 
 
-const char *String::c_str() const
+const char *MyString::c_str() const
 {
     return _str;
 }
 
-size_t String::length() const
+size_t MyString::length() const
 {
     return strlen(_str);
 }
 
-String String::removeBeginTo(const String &str , const String &defStr) const
+MyString MyString::removeBeginTo(const MyString &str , const MyString &defStr) const
 {
     const char *begin = strstr(_str, str.c_str());
 
@@ -54,10 +54,10 @@ String String::removeBeginTo(const String &str , const String &defStr) const
 
     begin += strlen(str.c_str());
 
-    return String(begin);
+    return MyString(begin);
 }
 
-String String::findNum(const String &str, const String &defStr) const
+MyString MyString::findNum(const MyString &str, const MyString &defStr) const
 {
     char *begin = strstr(_str, str.c_str());
 
@@ -72,30 +72,30 @@ String String::findNum(const String &str, const String &defStr) const
     }
     char temp = *end;
     *end = '\0'; //CRUNCH!!!!!!!!!!!!
-    String result(begin);
+    MyString result(begin);
     *end = temp;
 
     return result;
 }
 
-long String::toLong() const
+long MyString::toLong() const
 {
     return atol(_str);
 }
 
-String String::operator +(const String &anotherStr) const
+MyString MyString::operator +(const MyString &anotherStr) const
 {
     auto length = strlen(anotherStr._str) + strlen(this->_str) + 1;
     auto res = new char[length];
     res[0] = '\0';
     strcat_s(res, length, _str);
     strcat_s(res, length, anotherStr._str);
-    String result;
+    MyString result;
     result._str = res;
     return result;
 }
 
-void String::operator =(const char *anotherStr)
+void MyString::operator =(const char *anotherStr)
 {
     auto length = strlen( anotherStr ) + 1;
     clear();
@@ -103,12 +103,12 @@ void String::operator =(const char *anotherStr)
     strcpy_s( _str, length, anotherStr );
 }
 
-void String::operator =(const String &anotherStr)
+void MyString::operator =(const MyString &anotherStr)
 {
     *this = anotherStr._str;
 }
 
-void String::clear()
+void MyString::clear()
 {
     if ( _str != nullptr )
     {
@@ -117,12 +117,12 @@ void String::clear()
     }
 }
 
-String::~String()
+MyString::~MyString()
 {
     clear();
 }
 
-String operator +(const char *oneStr, const String &anotherStr)
+MyString operator +(const char *oneStr, const MyString &anotherStr)
 {
-    return String(oneStr) + anotherStr;
+    return MyString(oneStr) + anotherStr;
 }
