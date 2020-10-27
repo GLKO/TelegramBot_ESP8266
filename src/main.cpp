@@ -35,9 +35,9 @@ void setup()
     
     while (true)
     {
-        view.update();
         logic.update();
-
+        view.update();
         delay(1100);
     }
 }
+

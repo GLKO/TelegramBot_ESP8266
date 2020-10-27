@@ -33,6 +33,13 @@ void View::update()
     _needUpdate = false;
 }
 
+void View::modelUpdated()
+{
+    _needUpdate = true;
+}
+
+
+//------------- CONTROLLER --------------//
 long View::acceptReply(const MyString &reply)
 {
     long lastUpdateId = 0;
@@ -53,13 +60,6 @@ long View::acceptReply(const MyString &reply)
     }
 }
 
-void View::modelUpdated()
-{
-    _needUpdate = true;
-}
-
-
-//------------- CONTROLLER --------------//
 Model *View::model(TelegramController *instance)
 {
     return &(static_cast<View *>(instance)->_model);
