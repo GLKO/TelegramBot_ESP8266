@@ -112,7 +112,7 @@ void MyString::clear()
 {
     if ( _str != nullptr )
     {
-        delete _str;
+        delete[] _str;
         _str = nullptr;
     }
 }
