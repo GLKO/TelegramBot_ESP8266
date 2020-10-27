@@ -58,6 +58,10 @@ public:
     void post(MyString url) override;
     void get(MyString url) override;
     MyString reply() const override;
+
+private:
+    X509List _sertificate;
+    WiFiClientSecure _client;
 };
 
 #endif // PC

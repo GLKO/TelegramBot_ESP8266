@@ -10,10 +10,10 @@
 #ifdef PC
 int main()
 {
-    //check without it
     char *argv[1];
     int argc = 0;
     QCoreApplication a(argc, argv);
+
     InternetPc internet;
 #else
 void loop() {}
@@ -26,6 +26,8 @@ void setup()
     BME280Temperature temperatureSensor;
     BME280Humidity humiditySensor;
 
+    internet.connect();
+    
     TelegramBot bot(internet);
 
     MainLogic logic(temperatureSensor, humiditySensor);
@@ -36,6 +38,6 @@ void setup()
         view.update();
         logic.update();
 
-        delay(3000);
+        delay(1100);
     }
 }
