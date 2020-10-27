@@ -40,7 +40,7 @@ public:
 
 private:
     QNetworkAccessManager _internet;
-    MyString _reply;
+    MyString _reply = "";
 
     void waitReply(QNetworkReply *reply) const;
 };
@@ -62,6 +62,8 @@ public:
 private:
     X509List _sertificate;
     WiFiClientSecure _client;
+
+    MyString _reply = "";
 };
 
 #endif // PC

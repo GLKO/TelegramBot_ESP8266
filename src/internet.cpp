@@ -104,6 +104,7 @@ void InternetWifiArduino::connect() const
     while ( WiFi.status() != WL_CONNECTED )
        delay(1000);
 
+    Serial.println();
     Serial.println("WiFi connected!");
 
     Serial.print("Retrieving time: ");
@@ -133,6 +134,6 @@ void InternetWifiArduino::get(MyString url)
 
 MyString InternetWifiArduino::reply() const
 {
-    return MyString();
+    return _reply;
 }
 #endif // PC
