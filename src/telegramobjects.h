@@ -31,7 +31,7 @@ public:
 class TelegramMessage : public TelegramObject
 {
 public:
-    TelegramMessage(MyString text); //CRUTCH
+    explicit TelegramMessage(MyString text); //CRUTCH
     TelegramMessage(MyString text, MyString chatId);
     MyString json() const override;
 
@@ -132,7 +132,7 @@ private:
 class TelegramReplyButton : public TelegramObject
 {
 public:
-    TelegramReplyButton(MyString text);
+    explicit TelegramReplyButton(MyString text);
     MyString json() const override;
 
 private:

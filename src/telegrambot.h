@@ -10,7 +10,7 @@ class Internet;
 class TelegramBot
 {
 public:
-    TelegramBot(Internet &internet);
+    explicit TelegramBot(Internet &internet);
     void subscribeOnReply(TelegramController *controller);
 
     void update();
