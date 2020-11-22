@@ -8,7 +8,6 @@
 #include <QNetworkAccessManager>
 #else
 #include <ESP8266WiFi.h>
-#include <ESP8266HTTPClient.h>
 #endif
 
 
@@ -60,9 +59,7 @@ public:
     MyString reply() const override;
 
 private:
-    X509List _sertificate;
     WiFiClientSecure _client;
-
     MyString _reply = "";
 };
 
