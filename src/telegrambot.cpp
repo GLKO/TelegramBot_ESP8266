@@ -27,17 +27,17 @@ void TelegramBot::update()
 void TelegramBot::updateMessage(const TelegramObject &object)
 {
     const MyString method = "/editMessageText?";
-    _internet.post(_botApiUrl + _token + method + "message_id=57&" + object.json());
+    _internet.get(_botApiUrl + _token + method + "message_id=57&" + object.json());
 }
 
 void TelegramBot::sendMesage(const TelegramObject &object)
 {
     const MyString method = "/sendMessage?";
-    _internet.post(_botApiUrl + _token + method + object.json());
+    _internet.get(_botApiUrl + _token + method + object.json());
 }
 
 void TelegramBot::answerCallbackQuery(const MyString &callbackQueryId)
 {
     const MyString method = "/answerCallbackQuery?callback_query_id=";
-    _internet.post(_botApiUrl + _token + method + callbackQueryId);
+    _internet.get(_botApiUrl + _token + method + callbackQueryId);
 }
