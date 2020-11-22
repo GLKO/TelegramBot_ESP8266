@@ -16,23 +16,6 @@ void InternetPc::connect() const
 
 }
 
-void InternetPc::update()
-{
-
-}
-
-void InternetPc::post(MyString url)
-{
-    auto reply = _internet.get(QNetworkRequest(QUrl(url.c_str())));
-    qDebug() << "Post request sent" << '\n' << url.c_str();
-
-    waitReply(reply);
-
-    QTextStream str(reply);
-    _reply = str.readAll().toStdString().c_str();
-    qDebug() << _reply.c_str();
-}
-
 void InternetPc::get(MyString url)
 {
     auto reply = _internet.get(QNetworkRequest(QUrl(url.c_str())));
@@ -94,16 +77,6 @@ void InternetWifiArduino::connect() const
         now = time(nullptr);
     }
     Serial.println(now);
-}
-
-void InternetWifiArduino::update()
-{
-
-}
-
-void InternetWifiArduino::post(MyString url)
-{
-    
 }
 
 void InternetWifiArduino::get(MyString url)

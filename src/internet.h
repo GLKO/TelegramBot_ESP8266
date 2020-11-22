@@ -16,8 +16,6 @@ class Internet
 public:
     virtual void connect() const = 0;
 
-    virtual void update() = 0;
-    virtual void post(MyString url) = 0;
     virtual void get(MyString url) = 0;
     virtual MyString reply() const = 0;
 
@@ -32,8 +30,6 @@ public:
 
     void connect() const override;
 
-    void update() override;
-    void post(MyString url) override;
     void get(MyString url) override;
     MyString reply() const override;
 
@@ -53,8 +49,6 @@ public:
 
     void connect() const override;
 
-    void update() override;
-    void post(MyString url) override;
     void get(MyString url) override;
     MyString reply() const override;
 
