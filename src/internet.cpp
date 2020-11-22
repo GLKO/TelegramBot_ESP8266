@@ -18,8 +18,16 @@ void InternetPc::connect() const
 
 void InternetPc::get(MyString url)
 {
-    auto reply = _internet.get(QNetworkRequest(QUrl(url.c_str())));
-    qDebug() << "Get request sent";
+    auto encodedUrl = QUrl(url.c_str());
+    if (!encodedUrl.isValid())
+    {
+        qDebug() << "Url is incorrect: \n" << encodedUrl.errorString() << "\n\n";
+        _reply.clear();
+        return;
+    }
+
+    auto reply = _internet.get(QNetworkRequest());
+    qDebug() << "Get request sent" << url.c_str();
 
     waitReply(reply);
 
@@ -97,9 +105,12 @@ void InternetWifiArduino::get(MyString url)
             _reply = https.getString().c_str();
             Serial.print("Answer: ");
             Serial.println( _reply.c_str() );
-            Serial.println();
-            Serial.println();
+        } else {
+            Serial.print("Http code: ");
+            Serial.println( httpCode );
         }
+        Serial.println();
+        Serial.println();
     }
     else 
     {
@@ -114,3 +125,5 @@ MyString InternetWifiArduino::reply() const
     return _reply;
 }
 #endif // PC
+
+
