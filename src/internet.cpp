@@ -60,41 +60,20 @@ void InternetPc::waitReply(QNetworkReply *reply) const
 
 #else
 // ----------- ARDUINO --------------- //
+#include <ESP8266HTTPClient.h>
 
-const char TELEGRAM_CERTIFICATE_ROOT[] = R"=EOF=(
------BEGIN CERTIFICATE-----
-MIIDxTCCAq2gAwIBAgIBADANBgkqhkiG9w0BAQsFADCBgzELMAkGA1UEBhMCVVMx
-EDAOBgNVBAgTB0FyaXpvbmExEzARBgNVBAcTClNjb3R0c2RhbGUxGjAYBgNVBAoT
-EUdvRGFkZHkuY29tLCBJbmMuMTEwLwYDVQQDEyhHbyBEYWRkeSBSb290IENlcnRp
-ZmljYXRlIEF1dGhvcml0eSAtIEcyMB4XDTA5MDkwMTAwMDAwMFoXDTM3MTIzMTIz
-NTk1OVowgYMxCzAJBgNVBAYTAlVTMRAwDgYDVQQIEwdBcml6b25hMRMwEQYDVQQH
-EwpTY290dHNkYWxlMRowGAYDVQQKExFHb0RhZGR5LmNvbSwgSW5jLjExMC8GA1UE
-AxMoR28gRGFkZHkgUm9vdCBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkgLSBHMjCCASIw
-DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAL9xYgjx+lk09xvJGKP3gElY6SKD
-E6bFIEMBO4Tx5oVJnyfq9oQbTqC023CYxzIBsQU+B07u9PpPL1kwIuerGVZr4oAH
-/PMWdYA5UXvl+TW2dE6pjYIT5LY/qQOD+qK+ihVqf94Lw7YZFAXK6sOoBJQ7Rnwy
-DfMAZiLIjWltNowRGLfTshxgtDj6AozO091GB94KPutdfMh8+7ArU6SSYmlRJQVh
-GkSBjCypQ5Yj36w6gZoOKcUcqeldHraenjAKOc7xiID7S13MMuyFYkMlNAJWJwGR
-tDtwKj9useiciAF9n9T521NtYJ2/LOdYq7hfRvzOxBsDPAnrSTFcaUaz4EcCAwEA
-AaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMCAQYwHQYDVR0OBBYE
-FDqahQcQZyi27/a9BUFuIMGU2g/eMA0GCSqGSIb3DQEBCwUAA4IBAQCZ21151fmX
-WWcDYfF+OwYxdS2hII5PZYe096acvNjpL9DbWu7PdIxztDhC2gV7+AJ1uP2lsdeu
-9tfeE8tTEH6KRtGX+rcuKxGrkLAngPnon1rpN5+r5N9ss4UXnT3ZJE95kTXWXwTr
-gIOrmgIttRD02JDHBHNA7XIloKmf7J6raBKZV8aPEjoJpL1E/QYVN8Gb5DKj7Tjo
-2GTzLH4U/ALqn83/B2gX2yKQOC16jdFU8WnjXzPKej17CuPKf1855eJ1usV2GDPO
-LPAvTK33sefOT6jEm0pUBsV/fdUID+Ic/n4XuKxe9tQWskMJDE32p2u0mYRlynqI
-4uJEvlz36hz1
------END CERTIFICATE-----
-)=EOF=";
-
+// until 23 may 2022
+const char telegramBotApiFP[] PROGMEM = "f2ad299c3448dd8df4cf5232f65733682e81c190";
+// const char howsmysslFP[] PROGMEM = "E2 C7 E8 6D 53 D2 9E 9E C1 D2 06 4C C0 86 63 13 75 46 D8 95";
 
 InternetWifiArduino::InternetWifiArduino()
-    : _sertificate(TELEGRAM_CERTIFICATE_ROOT)
 {
-    Serial.begin(9600);
+    Serial.begin(115200);
+    WiFi.mode(WIFI_STA);
 
     configTime(0,0, "pool.ntp.org");
-    _client.setTrustAnchors(&_sertificate);
+
+    _client.setFingerprint(telegramBotApiFP);
 }
 
 void InternetWifiArduino::connect() const
@@ -129,7 +108,32 @@ void InternetWifiArduino::post(MyString url)
 
 void InternetWifiArduino::get(MyString url)
 {
+    HTTPClient https;
+    https.begin(_client, url.c_str());
 
+    int httpCode = https.GET();
+    Serial.print("Get: ");
+    Serial.println(url.c_str());
+    Serial.println();
+
+    // httpCode will be negative on error
+    if (httpCode > 0) 
+    {
+        if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) 
+        {
+            _reply = https.getString().c_str();
+            Serial.print("Answer: ");
+            Serial.println( _reply.c_str() );
+            Serial.println();
+            Serial.println();
+        }
+    }
+    else 
+    {
+        Serial.printf("Get request failed, error: %s\n", https.errorToString(httpCode).c_str());
+    }
+
+      https.end();
 }
 
 MyString InternetWifiArduino::reply() const
