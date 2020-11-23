@@ -18,7 +18,7 @@ void InternetPc::connect() const
 
 void InternetPc::get(MyString url)
 {
-    auto encodedUrl = QUrl(url.c_str());
+    auto encodedUrl = QUrl(url.c_str(), QUrl::StrictMode);
     if (!encodedUrl.isValid())
     {
         qDebug() << "Url is incorrect: \n" << encodedUrl.errorString() << "\n\n";
@@ -26,8 +26,8 @@ void InternetPc::get(MyString url)
         return;
     }
 
-    auto reply = _internet.get(QNetworkRequest());
-    qDebug() << "Get request sent" << url.c_str();
+    auto reply = _internet.get(QNetworkRequest(encodedUrl));
+    qDebug() << "Get request sent:\n" << url.c_str();
 
     waitReply(reply);
 
@@ -59,7 +59,7 @@ const char telegramBotApiFP[] PROGMEM = "f2ad299c3448dd8df4cf5232f65733682e81c19
 
 InternetWifiArduino::InternetWifiArduino()
 {
-    Serial.begin(115200);
+    // Serial.begin(115200);
     WiFi.mode(WIFI_STA);
 
     configTime(0,0, "pool.ntp.org");
@@ -74,17 +74,17 @@ void InternetWifiArduino::connect() const
     while ( WiFi.status() != WL_CONNECTED )
        delay(1000);
 
-    Serial.println();
-    Serial.println("WiFi connected!");
+    // Serial.println();
+    // Serial.println("WiFi connected!");
 
-    Serial.print("Retrieving time: ");
+    // Serial.print("Retrieving time: ");
     auto now = time(nullptr);
     while (now < 24*3600)
     {
         delay(100);
         now = time(nullptr);
     }
-    Serial.println(now);
+    // Serial.println(now);
 }
 
 void InternetWifiArduino::get(MyString url)
@@ -93,9 +93,9 @@ void InternetWifiArduino::get(MyString url)
     https.begin(_client, url.c_str());
 
     int httpCode = https.GET();
-    Serial.print("Get: ");
-    Serial.println(url.c_str());
-    Serial.println();
+    // Serial.print("Get: ");
+    // Serial.println(url.c_str());
+    // Serial.println();
 
     // httpCode will be negative on error
     if (httpCode > 0) 
@@ -103,18 +103,18 @@ void InternetWifiArduino::get(MyString url)
         if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) 
         {
             _reply = https.getString().c_str();
-            Serial.print("Answer: ");
-            Serial.println( _reply.c_str() );
+            // Serial.print("Answer: ");
+            // Serial.println( _reply.c_str() );
         } else {
-            Serial.print("Http code: ");
-            Serial.println( httpCode );
+            // Serial.print("Http code: ");
+            // Serial.println( httpCode );
         }
-        Serial.println();
-        Serial.println();
+        // Serial.println();
+        // Serial.println();
     }
     else 
     {
-        Serial.printf("Get request failed, error: %s\n", https.errorToString(httpCode).c_str());
+        // Serial.printf("Get request failed, error: %s\n", https.errorToString(httpCode).c_str());
     }
 
       https.end();
