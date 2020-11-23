@@ -19,6 +19,7 @@ public:
     MyString removeBeginTo(const MyString &str, const MyString &defStr = "") const;
     MyString findNum(const MyString &str, const MyString &defStr = "") const;
     long toLong() const;
+    MyString toUrl() const;
     void clear();
 
     MyString operator +(const MyString &anotherStr) const;

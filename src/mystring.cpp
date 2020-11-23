@@ -126,3 +126,34 @@ MyString operator +(const char *oneStr, const MyString &anotherStr)
 {
     return MyString(oneStr) + anotherStr;
 }
+
+MyString MyString::toUrl() const
+{
+    MyString result;
+
+    auto len = length();
+    char *const tempStr = new char[len*3+1];
+    const char *hex = "0123456789abcdef";
+
+    int pos = 0;
+    for (auto i = 0; i < len; i++)
+    {
+        if ( _str[i] == ' '
+          || _str[i] == '{'
+          || _str[i] == '}'
+          || _str[i] == '\\'
+          || _str[i] == '"')
+        {
+            tempStr[pos++] = '%';
+            tempStr[pos++] = hex[_str[i] >> 4];
+            tempStr[pos++] = hex[_str[i] & 15];
+        } else {
+            tempStr[pos++] = _str[i];
+        }
+    }
+    tempStr[pos] = '\0';
+
+    result = tempStr;
+    delete [] tempStr;
+    return result;
+}
