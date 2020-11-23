@@ -1,6 +1,7 @@
 #include "mainlogic.h"
 
 #include "isensor.h"
+#include <Arduino.h>
 
 
 MainLogic::MainLogic(Sensor &temperatureSensor, Sensor &humiditySensor)
@@ -10,8 +11,14 @@ MainLogic::MainLogic(Sensor &temperatureSensor, Sensor &humiditySensor)
 
 void MainLogic::update()
 {
-//    if (timeout(600sec)
-//    _view->modelUpdated();
+    static unsigned long lastTime;
+    auto currentTime = millis();
+
+   if (currentTime - lastTime < 600000ul) 
+   {
+       _view->modelUpdated();
+       lastTime = currentTime;
+   }
 
 //    if (smthg bad)
 //        _view ->alarm("!ALARM!");
@@ -20,7 +27,7 @@ void MainLogic::update()
 State MainLogic::currentState()
 {
     State result;
-    result.message = "Last update: ??.??.?? ??:??";
+    result.message = "=)";
     result.temperature = _temperatureSensor.value();
     result.humidity = _humiditySensor.value();
     return result;
