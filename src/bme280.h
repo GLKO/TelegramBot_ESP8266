@@ -7,7 +7,7 @@
 class BME280Temperature : public Sensor
 {
 public:
-    BME280Temperature();
+    BME280Temperature(uint8_t address);
 
     double value() override;
 };
@@ -17,7 +17,7 @@ public:
 class BME280Humidity : public Sensor
 {
 public:
-    BME280Humidity();
+    BME280Humidity(uint8_t address);
 
     double value() override;
 };

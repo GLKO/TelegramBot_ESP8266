@@ -23,8 +23,9 @@ void setup()
     InternetWifiArduino internet;
 #endif
 
-    BME280Temperature temperatureSensor;
-    BME280Humidity humiditySensor;
+    const uint8_t address = 0x76;
+    BME280Temperature temperatureSensor(address);
+    BME280Humidity humiditySensor(address);
 
     internet.connect();
     
