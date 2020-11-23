@@ -27,7 +27,7 @@ void TelegramBot::update()
 void TelegramBot::updateMessage(const TelegramObject &object)
 {
     const MyString method = "/editMessageText?";
-    _internet.get(_botApiUrl + _token + method + "message_id=57&" + object.json());
+    _internet.get(_botApiUrl + _token + method + "message_id=57&" + object.json().toUrl());
 }
 
 void TelegramBot::sendMesage(const TelegramObject &object)
