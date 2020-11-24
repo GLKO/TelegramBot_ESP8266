@@ -2,6 +2,7 @@
 #define MAINLOGIC_H
 
 #include "imodel.h"
+#include "UniversalTimer.h"
 
 class Sensor;
 
@@ -18,6 +19,8 @@ public:
 private:
     Sensor &_temperatureSensor;
     Sensor &_humiditySensor;
+
+    UniversalTimer _updateTimer;
 };
 
 #endif // MAINLOGIC_H
