@@ -14,11 +14,11 @@ void MainLogic::update()
     static unsigned long lastTime;
     auto currentTime = millis();
 
-   if (currentTime - lastTime < 600000ul) 
+   if (currentTime - lastTime > 600000ul) 
    {
        _view->modelUpdated();
        lastTime = currentTime;
-   }
+    }
 
 //    if (smthg bad)
 //        _view ->alarm("!ALARM!");
