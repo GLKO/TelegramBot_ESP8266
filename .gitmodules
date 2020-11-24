@@ -1,0 +1,3 @@
+[submodule "lib/UniversalTimer"]
+	path = lib/UniversalTimer
+	url = https://github.com/Gleky/UniversalTimer.git
