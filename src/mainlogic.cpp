@@ -24,7 +24,6 @@ State MainLogic::currentState()
     _updateTimer.start();
 
     State result;
-    result.message = "=)";
     result.temperature = _temperatureSensor.value();
     result.humidity = _humiditySensor.value();
     return result;

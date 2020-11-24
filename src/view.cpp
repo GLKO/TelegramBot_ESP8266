@@ -22,7 +22,7 @@ void View::update()
 
     auto state = _model.currentState();
 
-    TelegramMessage textMessage(state.message);
+    TelegramMessage textMessage("=)");
 
     _temperatureButton->updateText( MyString("   Temperature:       %.1f   ", state.temperature) );
     _humidityButton->updateText(    MyString("   Humidity:             %.1f   ", state.humidity) );

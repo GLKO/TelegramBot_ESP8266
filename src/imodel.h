@@ -6,7 +6,6 @@
 
 struct State
 {
-    MyString message = "blet";
     double temperature = 101;
     double humidity = 101;
 };
@@ -28,7 +27,6 @@ public:
 
 protected:
     IView *_view = nullptr;
-
 };
 
 #endif // MODEL_H
