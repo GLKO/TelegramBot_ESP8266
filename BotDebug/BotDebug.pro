@@ -18,6 +18,7 @@ DEFINES += PC
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
+    ../lib/UniversalTimer/universaltimer.h \
     ../src/arduinoonpc.h \
     ../src/bme280.h \
     ../src/config.h \
@@ -33,6 +34,7 @@ HEADERS += \
     ../src/view.h
 
 SOURCES += \
+        ../lib/UniversalTimer/universaltimer.cpp \
         ../src/bme280.cpp \
         ../src/internet.cpp \
         ../src/main.cpp \
@@ -41,6 +43,8 @@ SOURCES += \
         ../src/telegrambot.cpp \
         ../src/telegramobjects.cpp \
         ../src/view.cpp
+
+INCLUDEPATH += ../lib/UniversalTimer
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

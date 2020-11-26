@@ -2,7 +2,7 @@
 #define MAINLOGIC_H
 
 #include "imodel.h"
-#include "UniversalTimer.h"
+#include "universaltimer.h"
 
 class Sensor;
 
