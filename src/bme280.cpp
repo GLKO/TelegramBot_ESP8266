@@ -4,7 +4,7 @@
 
 
 Adafruit_BME280 bme;
-const uint8_t powerPin = 0;
+const uint8_t powerPin = 2;
 
 BME280Temperature::BME280Temperature(uint8_t address)
 {
