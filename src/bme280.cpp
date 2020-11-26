@@ -1,7 +1,7 @@
 #include "bme280.h"
 
+#ifndef PC
 #include <Adafruit_BME280.h>
-
 
 Adafruit_BME280 bme;
 const uint8_t powerPin = 2;
@@ -25,8 +25,6 @@ double BME280Temperature::value()
 }
 
 
-
-
 BME280Humidity::BME280Humidity(uint8_t address)
 {
     pinMode(powerPin, OUTPUT);
@@ -44,3 +42,34 @@ double BME280Humidity::value()
     digitalWrite(powerPin, LOW);
     return value;
 }
+
+#else
+#include <random>
+#include <time.h>
+
+double randomDouble()
+{
+    struct timespec now;
+    timespec_get(&now, TIME_UTC);
+    srand(now.tv_nsec);
+    return (std::rand() % 1000) / 10.;
+}
+
+
+#define UNUSED(x) (void)x;
+
+BME280Temperature::BME280Temperature(uint8_t address) {UNUSED(address)}
+
+double BME280Temperature::value()
+{
+    return randomDouble();
+}
+
+BME280Humidity::BME280Humidity(uint8_t address) {UNUSED(address)}
+
+double BME280Humidity::value()
+{
+    return randomDouble();
+}
+
+#endif
