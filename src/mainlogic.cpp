@@ -11,7 +11,7 @@ MainLogic::MainLogic(Sensor &temperatureSensor, Sensor &humiditySensor)
     _updateTimer.start();
 }
 
-void MainLogic::update()
+void MainLogic::loop()
 {
    if ( _updateTimer.timeout() ) _view->modelUpdated();
 

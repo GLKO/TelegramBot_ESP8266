@@ -12,7 +12,7 @@ class View : public IView, public TelegramController
 public:
     View(Model &model, TelegramBot &bot);
 
-    void update();
+    void loop();
     long acceptReply(const MyString &reply) override;
 
 private:

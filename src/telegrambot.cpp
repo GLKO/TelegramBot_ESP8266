@@ -14,7 +14,7 @@ void TelegramBot::subscribeOnReply(TelegramController *controller)
     _controller = controller;
 }
 
-void TelegramBot::update()
+void TelegramBot::loop()
 {
     _internet.loop();
     if ( _internet.replyReady() )

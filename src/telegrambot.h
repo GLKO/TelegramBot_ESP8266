@@ -13,7 +13,7 @@ public:
     explicit TelegramBot(Internet &internet);
     void subscribeOnReply(TelegramController *controller);
 
-    void update();
+    void loop();
 
     void sendMesage(const TelegramObject &object);
     void updateMessage(const TelegramObject &object);

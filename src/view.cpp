@@ -14,9 +14,9 @@ View::View(Model &model, TelegramBot &bot)
     _telegramBot.subscribeOnReply(this);
 }
 
-void View::update()
+void View::loop()
 {
-    _telegramBot.update();
+    _telegramBot.loop();
 
     if ( !_needUpdate ) return;
 

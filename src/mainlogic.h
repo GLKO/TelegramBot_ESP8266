@@ -11,7 +11,7 @@ class MainLogic : public Model
 public:
     MainLogic(Sensor &temperatureSensor,Sensor &humiditySensor);
 
-    void update();
+    void loop();
     State currentState() override;
 
     void tempOrHumidPressed() override;
