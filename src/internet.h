@@ -37,8 +37,8 @@ private:
     MyString _replyStr = "";
 
     QNetworkAccessManager _internet;
-    QNetworkReply *_replyObj;
-    bool _replyReady = true;
+    QNetworkReply *_replyObj = nullptr;
+    bool _replyReady = false;
 };
 
 #else

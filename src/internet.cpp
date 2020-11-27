@@ -21,7 +21,9 @@ void InternetPc::loop()
         QTextStream str(_replyObj);
         _replyStr = str.readAll().toStdString().c_str();
         _replyReady = true;
-        qDebug() << _replyStr.c_str();
+
+        if (_replyStr.length() > 0)
+            qDebug() << _replyStr.c_str();
     }
 }
 

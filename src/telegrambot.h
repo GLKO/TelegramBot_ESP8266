@@ -2,6 +2,7 @@
 #define TELEGRAMBOT_H
 
 #include "mystring.h"
+#include <queue>
 
 class TelegramController;
 class TelegramObject;
@@ -27,6 +28,15 @@ private:
     TelegramController *_controller = nullptr;
 
     long _lastUpdateId = 0;
+
+    std::queue<MyString> _importantRequestsQueue;
+    bool importantRequestInProgress() const;
+    bool importantRequestDone() const;
+    bool updateReceived() const;
+    bool _importantRequest = false;
+
+    void sendImportantRequest();
+    void sendUpdatesRequest();
 };
 
 
