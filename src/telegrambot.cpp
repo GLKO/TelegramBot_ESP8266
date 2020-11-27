@@ -16,12 +16,15 @@ void TelegramBot::subscribeOnReply(TelegramController *controller)
 
 void TelegramBot::update()
 {
-    MyString method = "/getUpdates?timeout=1&offset=" + MyString(_lastUpdateId+1); //allowed_updates=[\"callback_query\"]&
-    _internet.get(_botApiUrl + _token + method);
+    _internet.loop();
+    if ( _internet.replyReady() )
+    {
+        const auto reply = _internet.reply();
+        _lastUpdateId = _controller->acceptReply(reply);
 
-    const auto reply = _internet.reply();
-
-    _lastUpdateId = _controller->acceptReply(reply);
+        MyString method = "/getUpdates?timeout=10&offset=" + MyString(_lastUpdateId+1); //allowed_updates=[\"callback_query\"]&
+        _internet.get(_botApiUrl + _token + method);
+    }
 }
 
 void TelegramBot::updateMessage(const TelegramObject &object)
