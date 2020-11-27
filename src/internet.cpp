@@ -3,7 +3,6 @@
 #include "config.h"
 
 #ifdef PC
-#include <QNetworkReply>
 #include <QCoreApplication>
 
 InternetPc::InternetPc()
@@ -12,8 +11,18 @@ InternetPc::InternetPc()
 }
 
 void InternetPc::connect() const
-{
+{}
 
+void InternetPc::loop()
+{
+    QCoreApplication::processEvents();
+    if ( _replyObj != nullptr && _replyObj->isFinished() )
+    {
+        QTextStream str(_replyObj);
+        _replyStr = str.readAll().toStdString().c_str();
+        _replyReady = true;
+        qDebug() << _replyStr.c_str();
+    }
 }
 
 void InternetPc::get(MyString url)
@@ -22,32 +31,27 @@ void InternetPc::get(MyString url)
     if (!encodedUrl.isValid())
     {
         qDebug() << "Url is incorrect: \n" << encodedUrl.errorString() << "\n\n";
-        _reply.clear();
+        _replyStr.clear();
         return;
     }
 
-    auto reply = _internet.get(QNetworkRequest(encodedUrl));
+    if ( _replyObj != nullptr ) _replyObj->abort();
+
+    _replyObj = _internet.get(QNetworkRequest(encodedUrl));
+    _replyReady = false;
     qDebug() << "Get request sent:\n" << url.c_str();
+}
 
-    waitReply(reply);
-
-    QTextStream str(reply);
-    _reply = str.readAll().toStdString().c_str();
-    qDebug() << _reply.c_str();
+bool InternetPc::replyReady() const
+{
+    return _replyReady;
 }
 
 MyString InternetPc::reply() const
 {
-    return _reply;
+    return _replyStr;
 }
 
-void InternetPc::waitReply(QNetworkReply *reply) const
-{
-    while ( !reply->isFinished() )
-    {
-        QCoreApplication::processEvents();
-    }
-}
 
 #else
 // ----------- ARDUINO --------------- //

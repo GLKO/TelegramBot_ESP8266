@@ -1,46 +1,48 @@
 #ifndef INTERNET_H
 #define INTERNET_H
 
-//#include "arduinoonpc.h"
 #include "mystring.h"
-
-#ifdef PC
-#include <QNetworkAccessManager>
-#else
-#include <ESP8266WiFi.h>
-#endif
 
 
 class Internet
 {
 public:
     virtual void connect() const = 0;
+    virtual void loop() = 0;
 
     virtual void get(MyString url) = 0;
+    virtual bool replyReady() const = 0;
     virtual MyString reply() const = 0;
 
     virtual ~Internet() {}
 };
 
 #ifdef PC
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+
 class InternetPc : public Internet
 {
 public:
     InternetPc();
 
     void connect() const override;
+    void loop() override;
 
     void get(MyString url) override;
+    bool replyReady() const override;
     MyString reply() const override;
 
 private:
-    QNetworkAccessManager _internet;
-    MyString _reply = "";
+    MyString _replyStr = "";
 
-    void waitReply(QNetworkReply *reply) const;
+    QNetworkAccessManager _internet;
+    QNetworkReply *_replyObj;
+    bool _replyReady = true;
 };
 
 #else
+#include <ESP8266WiFi.h>
 
 class InternetWifiArduino : public Internet
 {
