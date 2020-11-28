@@ -1,11 +1,9 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "arduinoonpc.h"
+const char ssid[] = "your ssid";
+const char password[] = "your password";
 
-const String ssid = "your ssid";
-const String password = "your password";
-
-const String token = "your bot token";
+const token[] = "your bot token";
 
 #endif // CONFIG_H
