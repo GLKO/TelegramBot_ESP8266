@@ -4,6 +4,6 @@
 const char ssid[] = "your ssid";
 const char password[] = "your password";
 
-const token[] = "your bot token";
+const char token[] = "your bot token";
 
 #endif // CONFIG_H
